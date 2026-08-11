@@ -1,0 +1,15 @@
+# Sensitive variables & secrets
+terraform.tfvars
+*.tfvars
+!terraform.tfvars.example
+
+# Terraform local directory & state
+.terraform/
+*.tfstate
+*.tfstate*
+*.backup
+
+# OS & Editor temp files
+.DS_Store
+.idea/
+.vscode/

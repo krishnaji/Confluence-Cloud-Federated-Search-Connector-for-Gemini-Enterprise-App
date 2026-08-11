@@ -1,0 +1,23 @@
+# ------------------------------------------------------------------------------
+# Required Google Cloud Project Configuration
+# ------------------------------------------------------------------------------
+project_id              = "your-gcp-project-id"
+location                = "us" # 'global', 'us', or 'eu'
+collection_id           = "confluence-federated-us"
+collection_display_name = "Confluence Cloud Federated Search US"
+
+# ------------------------------------------------------------------------------
+# Required Confluence Cloud & OAuth Credentials
+# ------------------------------------------------------------------------------
+confluence_instance_uri = "https://your-domain.atlassian.net"
+instance_id             = "your-instance-id" # Atlassian cloudId from https://<domain>.atlassian.net/_edge/tenant_info
+
+client_id     = "your-atlassian-oauth-client-id"
+client_secret = "your-atlassian-oauth-client-secret"
+
+# ------------------------------------------------------------------------------
+# Optional Configuration (Uncomment to override defaults in variables.tf)
+# ------------------------------------------------------------------------------
+# connector_modes      = ["FEDERATED"]
+# enable_actions        = false
+# enabled_actions_list  = ["create_comment", "update_comment"]
