@@ -21,3 +21,14 @@ client_secret = "your-atlassian-oauth-client-secret"
 # connector_modes      = ["FEDERATED"]
 # enable_actions        = false
 # enabled_actions_list  = ["create_comment", "update_comment"]
+
+# ------------------------------------------------------------------------------
+# Slack Federated Search Configuration
+# ------------------------------------------------------------------------------
+slack_collection_id           = "slack-federated-us"
+slack_collection_display_name = "Slack Federated Search US"
+# slack_team_id               = "T01234567" # Optional Slack Workspace Team ID
+# slack_static_ip_enabled     = false
+# slack_enable_actions        = false
+# slack_enabled_actions_list  = ["send_message"]
+

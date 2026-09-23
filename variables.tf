@@ -9,6 +9,12 @@ variable "location" {
   default     = "global"
 }
 
+variable "confluence_location" {
+  type        = string
+  description = "The geographic location for the Confluence data connector."
+  default     = "us"
+}
+
 variable "collection_id" {
   type        = string
   description = "The collection ID for the Discovery Engine Data Connector (RFC-1034 compliant, max 63 characters)."
@@ -60,3 +66,51 @@ variable "enabled_actions_list" {
   description = "List of actions to enable if enable_actions is true."
   default     = ["create_comment", "update_comment"]
 }
+
+# ------------------------------------------------------------------------------
+# Slack Federated Connector Variables
+# ------------------------------------------------------------------------------
+
+variable "slack_collection_id" {
+  type        = string
+  description = "The collection ID for the Slack Discovery Engine Data Connector (RFC-1034 compliant, max 63 characters)."
+  default     = "slack-federated-collection"
+}
+
+variable "slack_collection_display_name" {
+  type        = string
+  description = "Human-readable display name for the Slack Collection in the Google Cloud Console."
+  default     = "Slack Federated Search"
+}
+
+variable "slack_team_id" {
+  type        = string
+  description = "Optional Slack Team ID (e.g., T01234567) to restrict users to a specific Slack workspace."
+  default     = ""
+}
+
+variable "slack_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the Slack connector."
+  default     = false
+}
+
+variable "slack_connector_modes" {
+  type        = list(string)
+  description = "Modes enabled for the Slack connector."
+  default     = ["FEDERATED", "ACTIONS"]
+}
+
+variable "slack_enable_actions" {
+  type        = bool
+  description = "Whether to enable Slack actions alongside federated search."
+  default     = false
+}
+
+variable "slack_enabled_actions_list" {
+  type        = list(string)
+  description = "List of Slack actions to enable if slack_enable_actions is true."
+  default     = ["send_message"]
+}
+
+

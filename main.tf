@@ -121,3 +121,52 @@ resource "google_discovery_engine_data_connector" "confluence_federated_connecto
     google_secret_manager_secret_version.confluence_client_secret
   ]
 }
+
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - Slack Federated Search Mode
+# ------------------------------------------------------------------------------
+resource "google_discovery_engine_data_connector" "slack_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.slack_collection_id
+  collection_display_name = var.slack_collection_display_name
+  data_source             = "slack"
+
+  connector_modes   = ["FEDERATED", "ACTIONS"]
+  refresh_interval  = "86400s"
+  sync_mode         = "PERIODIC"
+ 
+
+  # Connector Parameters from Console payload
+  params = merge(
+    {
+      unused_auth_param = "unused"
+      auth_type         = "AUTHORIZATION_TYPE_UNDEFINED"
+    },
+    var.slack_team_id != "" ? {
+      team_id = var.slack_team_id
+    } : {}
+  )
+
+  # Action configuration captured from Console payload
+  action_config {
+    action_params = {
+      auth_type = "OAUTH"
+      auth_key  = "OAuth"
+    }
+    create_bap_connection = true
+  }
+
+  # Federated Search Entities for Slack
+  entities {
+    entity_name = "conversation"
+  }
+
+  entities {
+    entity_name = "file"
+  }
+
+  entities {
+    entity_name = "message"
+  }
+}
