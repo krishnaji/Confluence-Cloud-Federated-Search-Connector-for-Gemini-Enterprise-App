@@ -32,3 +32,13 @@ slack_collection_display_name = "Slack Federated Search US"
 # slack_enable_actions        = false
 # slack_enabled_actions_list  = ["send_message"]
 
+# ------------------------------------------------------------------------------
+# PagerDuty Federated Search Configuration
+# ------------------------------------------------------------------------------
+pagerduty_collection_id           = "pagerduty-federated-1"
+pagerduty_collection_display_name = "PagerDuty Federated Search"
+pagerduty_client_id               = "your-pagerduty-oauth-client-id"
+pagerduty_client_secret           = "your-pagerduty-oauth-client-secret"
+# pagerduty_static_ip_enabled     = false
+
+

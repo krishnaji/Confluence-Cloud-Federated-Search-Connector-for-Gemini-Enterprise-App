@@ -113,4 +113,40 @@ variable "slack_enabled_actions_list" {
   default     = ["send_message"]
 }
 
+# ------------------------------------------------------------------------------
+# PagerDuty Federated Connector Variables
+# ------------------------------------------------------------------------------
+
+variable "pagerduty_collection_id" {
+  type        = string
+  description = "The collection ID for the PagerDuty Discovery Engine Data Connector."
+  default     = "pagerduty-federated-1"
+}
+
+variable "pagerduty_collection_display_name" {
+  type        = string
+  description = "Display name for the PagerDuty Collection in Google Cloud Console."
+  default     = "PagerDuty Federated Search"
+}
+
+variable "pagerduty_client_id" {
+  type        = string
+  description = "OAuth 2.0 Client ID for PagerDuty action config."
+  default     = ""
+}
+
+variable "pagerduty_client_secret" {
+  type        = string
+  description = "OAuth 2.0 Client Secret for PagerDuty action config."
+  sensitive   = true
+  default     = ""
+}
+
+variable "pagerduty_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the PagerDuty connector."
+  default     = false
+}
+
+
 

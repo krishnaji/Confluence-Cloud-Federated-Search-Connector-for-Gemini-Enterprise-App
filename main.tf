@@ -56,7 +56,7 @@ resource "google_secret_manager_secret_version" "confluence_instance_id" {
 
 resource "google_discovery_engine_data_connector" "confluence_federated_connector" {
   project                 = var.project_id
-  location                = var.location
+  location                = var.confluence_location
   collection_id           = var.collection_id
   collection_display_name = var.collection_display_name
   data_source             = "confluence"
@@ -117,6 +117,10 @@ resource "google_discovery_engine_data_connector" "confluence_federated_connecto
     }
   }
 
+  lifecycle {
+    ignore_changes = [collection_display_name]
+  }
+
   depends_on = [
     google_secret_manager_secret_version.confluence_client_secret
   ]
@@ -138,22 +142,22 @@ resource "google_discovery_engine_data_connector" "slack_federated_connector" {
  
 
   # Connector Parameters from Console payload
-  params = merge(
-    {
-      unused_auth_param = "unused"
-      auth_type         = "AUTHORIZATION_TYPE_UNDEFINED"
-    },
-    var.slack_team_id != "" ? {
-      team_id = var.slack_team_id
-    } : {}
-  )
+  params = {
+    unused_auth_param = "unused"
+    auth_type         = "AUTHORIZATION_TYPE_UNDEFINED"
+  }
 
   # Action configuration captured from Console payload
   action_config {
-    action_params = {
-      auth_type = "OAUTH"
-      auth_key  = "OAuth"
-    }
+    action_params = merge(
+      {
+        auth_type = "OAUTH"
+        auth_key  = "OAuth"
+      },
+      var.slack_team_id != "" ? {
+        team_id = var.slack_team_id
+      } : {}
+    )
     create_bap_connection = true
   }
 
@@ -169,4 +173,62 @@ resource "google_discovery_engine_data_connector" "slack_federated_connector" {
   entities {
     entity_name = "message"
   }
+
+  lifecycle {
+    ignore_changes = [bap_config, destination_configs, connector_modes]
+  }
 }
+
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - PagerDuty Federated Search Mode
+# ------------------------------------------------------------------------------
+
+resource "google_discovery_engine_data_connector" "pagerduty_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.pagerduty_collection_id
+  collection_display_name = var.pagerduty_collection_display_name
+  data_source             = "pagerduty"
+
+  connector_modes   = ["FEDERATED"]
+  refresh_interval  = "86400s"
+  sync_mode         = "PERIODIC"
+  static_ip_enabled = var.pagerduty_static_ip_enabled
+
+  # Connector Parameters
+  params = {
+    client_id     = var.pagerduty_client_id
+    client_secret = var.pagerduty_client_secret
+    auth_type     = "OAUTH"
+  }
+
+  # Action configuration captured from Console payload
+  action_config {
+    action_params = {
+      client_id     = var.pagerduty_client_id
+      client_secret = var.pagerduty_client_secret
+   
+      auth_type     = "OAUTH"
+      auth_key      = "OAuth"
+    }
+    create_bap_connection = true
+  }
+
+  # Federated Search Entities for PagerDuty
+  entities {
+    entity_name = "incidents"
+  }
+
+  entities {
+    entity_name = "services"
+  }
+
+  entities {
+    entity_name = "users"
+  }
+
+  lifecycle {
+    ignore_changes = [bap_config]
+  }
+}
+

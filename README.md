@@ -1,8 +1,8 @@
-# Terraform for Confluence Cloud & Slack Federated Search Connectors for Gemini Enterprise 
+# Terraform for Confluence Cloud, Slack & PagerDuty Federated Search Connectors for Gemini Enterprise 
 
-This Terraform module provisions **Google Discovery Engine Data Connectors** configured for **Confluence Cloud Federated Search** and **Slack Federated Search** in Gemini Enterprise.
+This Terraform module provisions **Google Discovery Engine Data Connectors** configured for **Confluence Cloud**, **Slack**, and **PagerDuty** Federated Search in Gemini Enterprise.
 
-In **Federated Search mode**, Gemini Enterprise sends search queries directly to Atlassian's Confluence Cloud API and Slack's API in real-time, retrieving live results without needing data ingestion or indexing schedules.
+In **Federated Search mode**, Gemini Enterprise sends search queries directly to Atlassian's Confluence Cloud API, Slack's API, and PagerDuty's API in real-time, retrieving live results without needing data ingestion or indexing schedules.
 
 ---
 
@@ -24,13 +24,17 @@ In **Federated Search mode**, Gemini Enterprise sends search queries directly to
    - Ensure your Slack workspace has a plan that includes Slack AI search and that the Gemini Enterprise app is approved in your Slack App Marketplace.
    - Optionally note your **Slack Team ID** (`T01234567`) if you want to restrict connections to a single Slack workspace.
 
+4. **PagerDuty Setup (OAuth 2.0)**:
+   - Obtain your PagerDuty OAuth App credentials (`client_id`, `client_secret`, and `refresh_token`).
+   - Supported federated entities: `incidents`, `services`, `users`.
+
 ---
 
 ## Module Files
 
-- [`main.tf`](main.tf): Provider setup, Secret Manager resources for Confluence OAuth secrets, and `google_discovery_engine_data_connector` resources for both **Confluence** (`confluence_federated_connector`) and **Slack** (`slack_federated_connector`).
-- [`variables.tf`](variables.tf): Variable declarations for GCP project ID, location, Confluence instance URI/credentials, and Slack connector configuration.
-- [`outputs.tf`](outputs.tf): Resource names, Collection IDs, states, and post-deployment authorization instructions for both connectors.
+- [`main.tf`](main.tf): Provider setup, Secret Manager resources for Confluence OAuth secrets, and `google_discovery_engine_data_connector` resources for **Confluence** (`confluence_federated_connector`), **Slack** (`slack_federated_connector`), and **PagerDuty** (`pagerduty_federated_connector`).
+- [`variables.tf`](variables.tf): Variable declarations for GCP project ID, location, Confluence, Slack, and PagerDuty connectors.
+- [`outputs.tf`](outputs.tf): Resource names, Collection IDs, states, and post-deployment authorization instructions.
 - [`terraform.tfvars.example`](terraform.tfvars.example): Example parameter inputs file.
 
 ---
