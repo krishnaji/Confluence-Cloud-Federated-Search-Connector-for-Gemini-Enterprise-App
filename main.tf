@@ -118,7 +118,7 @@ resource "google_discovery_engine_data_connector" "confluence_federated_connecto
   }
 
   lifecycle {
-    ignore_changes = [collection_display_name]
+    ignore_changes = [collection_display_name, action_config]
   }
 
   depends_on = [
@@ -231,4 +231,98 @@ resource "google_discovery_engine_data_connector" "pagerduty_federated_connector
     ignore_changes = [bap_config]
   }
 }
+
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - Jira Federated Search Mode
+# ------------------------------------------------------------------------------
+
+resource "google_discovery_engine_data_connector" "jira_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.jira_collection_id
+  collection_display_name = var.jira_collection_display_name
+  data_source             = "jira"
+
+  connector_modes   = ["FEDERATED"]
+  refresh_interval  = "86400s"
+  sync_mode         = "PERIODIC"
+  static_ip_enabled = var.jira_static_ip_enabled
+
+  # Connector Parameters
+  params = {
+    instance_uri  = var.jira_instance_uri
+    instance_id   = var.jira_instance_id
+    client_id     = var.jira_client_id
+    client_secret = var.jira_client_secret
+    refresh_token = "unused"
+    auth_type     = "OAUTH"
+  }
+
+  destination_configs {
+    key = "url"
+    destinations {
+      host = var.jira_instance_uri
+    }
+  }
+
+  # Action configuration captured from Console payload
+  action_config {
+    action_params = {
+      instance_uri          = var.jira_instance_uri
+      client_id             = var.jira_client_id
+      client_secret         = var.jira_client_secret
+      instance_id           = var.jira_instance_id
+      auth_type             = "OAUTH"
+      auth_key              = "OAuth"
+      include_custom_fields = "false"
+    }
+    create_bap_connection = true
+  }
+
+  # Federated Search Entities for Jira
+  entities {
+    entity_name = "project"
+  }
+
+  entities {
+    entity_name = "attachment"
+  }
+
+  entities {
+    entity_name = "comment"
+  }
+
+  entities {
+    entity_name = "issue"
+  }
+
+  entities {
+    entity_name = "bug"
+  }
+
+  entities {
+    entity_name = "epic"
+  }
+
+  entities {
+    entity_name = "story"
+  }
+
+  entities {
+    entity_name = "task"
+  }
+
+  entities {
+    entity_name = "worklog"
+  }
+
+  entities {
+    entity_name = "board"
+  }
+
+  lifecycle {
+    ignore_changes = [bap_config]
+  }
+}
+
 

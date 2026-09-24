@@ -41,4 +41,16 @@ pagerduty_client_id               = "your-pagerduty-oauth-client-id"
 pagerduty_client_secret           = "your-pagerduty-oauth-client-secret"
 # pagerduty_static_ip_enabled     = false
 
+# ------------------------------------------------------------------------------
+# Jira Federated Search Configuration
+# ------------------------------------------------------------------------------
+jira_collection_id           = "jira-federated-1"
+jira_collection_display_name = "Jira Federated Search"
+jira_instance_uri            = "https://your-domain.atlassian.net"
+jira_instance_id             = "your-atlassian-cloud-id"
+jira_client_id               = "your-atlassian-jira-oauth-client-id"
+jira_client_secret           = "your-atlassian-jira-oauth-client-secret"
+# jira_static_ip_enabled      = false
+
+
 

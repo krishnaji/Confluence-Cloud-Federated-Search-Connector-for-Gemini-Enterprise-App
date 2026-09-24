@@ -148,5 +148,53 @@ variable "pagerduty_static_ip_enabled" {
   default     = false
 }
 
+# ------------------------------------------------------------------------------
+# Jira Federated Connector Variables
+# ------------------------------------------------------------------------------
+
+variable "jira_collection_id" {
+  type        = string
+  description = "The collection ID for the Jira Discovery Engine Data Connector."
+  default     = "jira-federated-1"
+}
+
+variable "jira_collection_display_name" {
+  type        = string
+  description = "Display name for the Jira Collection in Google Cloud Console."
+  default     = "Jira Federated Search"
+}
+
+variable "jira_instance_uri" {
+  type        = string
+  description = "The base URL of your Jira Cloud instance (e.g., https://your-domain.atlassian.net)."
+  default     = "https://shkhose.atlassian.net"
+}
+
+variable "jira_instance_id" {
+  type        = string
+  description = "Atlassian Cloud Instance ID (cloudId) for Jira."
+  default     = "3421cb4e-6e7d-498b-81ae-abaafdc3091a"
+}
+
+variable "jira_client_id" {
+  type        = string
+  description = "OAuth 2.0 Client ID for Jira."
+  default     = ""
+}
+
+variable "jira_client_secret" {
+  type        = string
+  description = "OAuth 2.0 Client Secret for Jira."
+  sensitive   = true
+  default     = ""
+}
+
+variable "jira_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the Jira connector."
+  default     = false
+}
+
+
 
 

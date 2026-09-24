@@ -15,7 +15,7 @@ output "data_connector_state" {
 
 output "federated_search_next_steps" {
   description = "Important instructions for completing Federated Search authorization."
-  value       = "After Terraform provisions the federated connectors, open the Gemini Enterprise Console under Data Stores, select '${var.collection_display_name}', '${var.slack_collection_display_name}', and '${var.pagerduty_collection_display_name}', and perform the initial OAuth login to complete end-user authorization."
+  value       = "After Terraform provisions the federated connectors, open the Gemini Enterprise Console under Data Stores, select '${var.collection_display_name}', '${var.slack_collection_display_name}', '${var.pagerduty_collection_display_name}', and '${var.jira_collection_display_name}', and perform the initial OAuth login to complete end-user authorization."
 }
 
 output "slack_data_connector_name" {
@@ -47,5 +47,21 @@ output "pagerduty_data_connector_state" {
   description = "The state of the PagerDuty Data Connector."
   value       = google_discovery_engine_data_connector.pagerduty_federated_connector.state
 }
+
+output "jira_data_connector_name" {
+  description = "The full resource name of the Jira Federated Data Connector."
+  value       = google_discovery_engine_data_connector.jira_federated_connector.name
+}
+
+output "jira_collection_id" {
+  description = "The Collection ID managing the Jira federated data store."
+  value       = google_discovery_engine_data_connector.jira_federated_connector.collection_id
+}
+
+output "jira_data_connector_state" {
+  description = "The state of the Jira Data Connector."
+  value       = google_discovery_engine_data_connector.jira_federated_connector.state
+}
+
 
 
