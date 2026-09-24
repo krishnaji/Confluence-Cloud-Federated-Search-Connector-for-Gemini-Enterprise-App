@@ -195,6 +195,68 @@ variable "jira_static_ip_enabled" {
   default     = false
 }
 
+# ------------------------------------------------------------------------------
+# Gmail Federated Connector Variables
+# ------------------------------------------------------------------------------
 
+variable "gmail_collection_id" {
+  type        = string
+  description = "The collection ID for the Gmail Discovery Engine Data Connector."
+  default     = "gmail-federated-1"
+}
 
+variable "gmail_collection_display_name" {
+  type        = string
+  description = "Display name for the Gmail Collection in Google Cloud Console."
+  default     = "Gmail Federated Search"
+}
 
+variable "gmail_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the Gmail connector."
+  default     = false
+}
+
+# ------------------------------------------------------------------------------
+# Google Calendar Federated Connector Variables
+# ------------------------------------------------------------------------------
+
+variable "google_calendar_collection_id" {
+  type        = string
+  description = "The collection ID for the Google Calendar Discovery Engine Data Connector."
+  default     = "google-calendar-federated-1"
+}
+
+variable "google_calendar_collection_display_name" {
+  type        = string
+  description = "Display name for the Google Calendar Collection in Google Cloud Console."
+  default     = "Google Calendar Federated Search"
+}
+
+variable "google_calendar_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the Google Calendar connector."
+  default     = false
+}
+
+# ------------------------------------------------------------------------------
+# Google Drive Federated Connector Variables
+# ------------------------------------------------------------------------------
+
+variable "google_drive_collection_id" {
+  type        = string
+  description = "The collection ID for the Google Drive Discovery Engine Data Connector."
+  default     = "google-drive-federated-1"
+}
+
+variable "google_drive_collection_display_name" {
+  type        = string
+  description = "Display name for the Google Drive Collection in Google Cloud Console."
+  default     = "Google Drive Federated Search"
+}
+
+variable "google_drive_static_ip_enabled" {
+  type        = bool
+  description = "Whether to enable static IP addresses for the Google Drive connector."
+  default     = false
+}

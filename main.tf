@@ -325,4 +325,96 @@ resource "google_discovery_engine_data_connector" "jira_federated_connector" {
   }
 }
 
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - Gmail Federated Search Mode
+# ------------------------------------------------------------------------------
+
+resource "google_discovery_engine_data_connector" "gmail_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.gmail_collection_id
+  collection_display_name = var.gmail_collection_display_name
+  data_source             = "google_mail"
+
+  connector_modes   = ["FEDERATED"]
+  refresh_interval  = "0s"
+  static_ip_enabled = var.gmail_static_ip_enabled
+
+  # Connector Parameters
+  params = {
+    auth_type = "AUTHORIZATION_TYPE_UNDEFINED"
+  }
+
+  # Federated Search Entities for Gmail
+  entities {
+    entity_name = "google_mail"
+  }
+
+  lifecycle {
+    ignore_changes = [bap_config]
+  }
+}
+
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - Google Calendar Federated Search Mode
+# ------------------------------------------------------------------------------
+
+resource "google_discovery_engine_data_connector" "google_calendar_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.google_calendar_collection_id
+  collection_display_name = var.google_calendar_collection_display_name
+  data_source             = "google_calendar"
+
+  connector_modes   = ["FEDERATED"]
+  refresh_interval  = "0s"
+  static_ip_enabled = var.google_calendar_static_ip_enabled
+
+  # Connector Parameters
+  params = {
+    auth_type = "AUTHORIZATION_TYPE_UNDEFINED"
+  }
+
+  # Federated Search Entities for Google Calendar
+  entities {
+    entity_name = "google_calendar"
+  }
+
+  lifecycle {
+    ignore_changes = [bap_config]
+  }
+}
+
+# ------------------------------------------------------------------------------
+# Discovery Engine Data Connector - Google Drive Federated Search Mode
+# ------------------------------------------------------------------------------
+
+resource "google_discovery_engine_data_connector" "google_drive_federated_connector" {
+  project                 = var.project_id
+  location                = var.location
+  collection_id           = var.google_drive_collection_id
+  collection_display_name = var.google_drive_collection_display_name
+  data_source             = "google_drive"
+
+  connector_modes   = ["FEDERATED"]
+  refresh_interval  = "0s"
+  static_ip_enabled = var.google_drive_static_ip_enabled
+
+  # Connector Parameters
+  params = {
+    auth_type = "AUTHORIZATION_TYPE_UNDEFINED"
+  }
+
+  # Federated Search Entities for Google Drive
+  entities {
+    entity_name = "google_drive"
+  }
+
+  lifecycle {
+    ignore_changes = [bap_config]
+  }
+}
+
+
+
 

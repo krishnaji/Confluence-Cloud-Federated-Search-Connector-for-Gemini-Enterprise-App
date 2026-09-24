@@ -1,8 +1,8 @@
-# Terraform for Confluence Cloud, Slack, PagerDuty & Jira Federated Search Connectors for Gemini Enterprise 
+# Terraform for Confluence Cloud, Slack, PagerDuty, Jira, Gmail, Google Calendar & Google Drive Federated Search Connectors for Gemini Enterprise 
 
-This Terraform module provisions **Google Discovery Engine Data Connectors** configured for **Confluence Cloud**, **Slack**, **PagerDuty**, and **Jira** Federated Search in Gemini Enterprise.
+This Terraform module provisions **Google Discovery Engine Data Connectors** configured for **Confluence Cloud**, **Slack**, **PagerDuty**, **Jira**, **Gmail**, **Google Calendar**, and **Google Drive** Federated Search in Gemini Enterprise.
 
-In **Federated Search mode**, Gemini Enterprise sends search queries directly to external APIs (Atlassian Confluence, Slack, PagerDuty, and Jira) in real-time, retrieving live results without needing data ingestion or indexing schedules.
+In **Federated Search mode**, Gemini Enterprise sends search queries directly to external and Google Workspace APIs (Atlassian Confluence, Slack, PagerDuty, Jira, Gmail, Google Calendar, and Google Drive) in real-time, retrieving live results without needing data ingestion or indexing schedules.
 
 ---
 
@@ -33,12 +33,19 @@ In **Federated Search mode**, Gemini Enterprise sends search queries directly to
    - Supported federated entities: `project`, `attachment`, `comment`, `issue`, `bug`, `epic`, `story`, `task`, `worklog`, `board`.
    - Requires Jira Cloud instance URL (`https://your-domain.atlassian.net`) and Cloud Instance ID (`cloudId`).
 
+6. **Google Workspace Setup (Gmail, Google Calendar & Google Drive)**:
+   - Built-in Google Workspace integration (`auth_type = "AUTHORIZATION_TYPE_UNDEFINED"`).
+   - Supported federated entities:
+     - Gmail: `google_mail`
+     - Google Calendar: `google_calendar`
+     - Google Drive: `google_drive`
+
 ---
 
 ## Module Files
 
-- [`main.tf`](main.tf): Provider setup, Secret Manager resources for Confluence OAuth secrets, and `google_discovery_engine_data_connector` resources for **Confluence** (`confluence_federated_connector`), **Slack** (`slack_federated_connector`), **PagerDuty** (`pagerduty_federated_connector`), and **Jira** (`jira_federated_connector`).
-- [`variables.tf`](variables.tf): Variable declarations for GCP project ID, location, Confluence, Slack, PagerDuty, and Jira connectors.
+- [`main.tf`](main.tf): Provider setup, Secret Manager resources for Confluence OAuth secrets, and `google_discovery_engine_data_connector` resources for **Confluence** (`confluence_federated_connector`), **Slack** (`slack_federated_connector`), **PagerDuty** (`pagerduty_federated_connector`), **Jira** (`jira_federated_connector`), **Gmail** (`gmail_federated_connector`), **Google Calendar** (`google_calendar_federated_connector`), and **Google Drive** (`google_drive_federated_connector`).
+- [`variables.tf`](variables.tf): Variable declarations for GCP project ID, location, Confluence, Slack, PagerDuty, Jira, Gmail, Google Calendar, and Google Drive connectors.
 - [`outputs.tf`](outputs.tf): Resource names, Collection IDs, states, and post-deployment authorization instructions.
 - [`terraform.tfvars.example`](terraform.tfvars.example): Example parameter inputs file.
 
@@ -86,6 +93,18 @@ In **Federated Search mode**, Gemini Enterprise sends search queries directly to
    jira_instance_id             = "your-atlassian-cloud-id"
    jira_client_id               = "your-jira-client-id"
    jira_client_secret           = "your-jira-client-secret"
+
+   # Gmail Federated Search Configuration
+   gmail_collection_id           = "gmail-federated-1"
+   gmail_collection_display_name = "Gmail Federated Search"
+
+   # Google Calendar Federated Search Configuration
+   google_calendar_collection_id           = "google-calendar-federated-1"
+   google_calendar_collection_display_name = "Google Calendar Federated Search"
+
+   # Google Drive Federated Search Configuration
+   google_drive_collection_id           = "google-drive-federated-1"
+   google_drive_collection_display_name = "Google Drive Federated Search"
    ```
 
 4. **Initialize and apply Terraform**:
@@ -97,7 +116,7 @@ In **Federated Search mode**, Gemini Enterprise sends search queries directly to
 
 5. **Complete One-Time OAuth Consent**:
    - Go to **Google Cloud Console -> Gemini Enterprise -> Data Stores**.
-   - Select the newly created Data Stores (**Confluence Cloud**, **Slack**, **PagerDuty**, **Jira**).
+   - Select the newly created Data Stores (**Confluence Cloud**, **Slack**, **PagerDuty**, **Jira**, **Gmail**, **Google Calendar**, **Google Drive**).
    - Click **Login** / **Authorize** to complete the OAuth sign-in and authorize live federated queries.
 
 ---
@@ -108,5 +127,11 @@ In **Federated Search mode**, Gemini Enterprise sends search queries directly to
 - [Google Cloud Docs - Set up Confluence Cloud Federated Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/confluence-cloud/set-up-data-store#federated_search)
 - [Google Cloud Docs - Set up Slack Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/slack/set-up-data-store)
 - [Google Cloud Docs - Set up Jira Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/jira/set-up-data-store)
+- [Google Cloud Docs - Set up Gmail Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/gmail/set-up-data-store)
+- [Google Cloud Docs - Set up Google Calendar Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/google-calendar/set-up-data-store)
+- [Google Cloud Docs - Set up Google Drive Data Store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/google-drive/set-up-data-store)
+
+
+
 
 

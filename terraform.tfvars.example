@@ -52,5 +52,25 @@ jira_client_id               = "your-atlassian-jira-oauth-client-id"
 jira_client_secret           = "your-atlassian-jira-oauth-client-secret"
 # jira_static_ip_enabled      = false
 
+# ------------------------------------------------------------------------------
+# Gmail Federated Search Configuration (Google Workspace Managed)
+# ------------------------------------------------------------------------------
+gmail_collection_id           = "gmail-federated-1"
+gmail_collection_display_name = "Gmail Federated Search"
+# gmail_static_ip_enabled     = false
+
+# ------------------------------------------------------------------------------
+# Google Calendar Federated Search Configuration (Google Workspace Managed)
+# ------------------------------------------------------------------------------
+google_calendar_collection_id           = "google-calendar-federated-1"
+google_calendar_collection_display_name = "Google Calendar Federated Search"
+# google_calendar_static_ip_enabled     = false
+
+# ------------------------------------------------------------------------------
+# Google Drive Federated Search Configuration (Google Workspace Managed)
+# ------------------------------------------------------------------------------
+google_drive_collection_id           = "google-drive-federated-1"
+google_drive_collection_display_name = "Google Drive Federated Search"
+# google_drive_static_ip_enabled     = false
 
 
